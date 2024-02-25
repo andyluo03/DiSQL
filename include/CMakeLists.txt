@@ -1,15 +1,13 @@
 cmake_minimum_required(VERSION 3.28.2)
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+project(DiSQLLib)
 
-
-project(DiSQL)
-add_executable(DiSQL DiSQL.cpp)
-set_property(TARGET DiSQL PROPERTY CXX_STANDARD 20)
-
-#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Werror -pedantic")
-
-#set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g -O0")
+file(GLOB SOURCES 
+    discord.cpp
+    discord_credentials.cpp
+    row_node.cpp
+    schema.cpp
+)
 
 include(FetchContent)
 FetchContent_Declare(cpr GIT_REPOSITORY https://github.com/libcpr/cpr.git
@@ -20,5 +18,6 @@ FetchContent_Declare(fmt GIT_REPOSITORY https://github.com/fmtlib/fmt.git
                      GIT_TAG e69e5f9)
 FetchContent_MakeAvailable(fmt)
 
-add_subdirectory(include)
-target_link_libraries(DiSQL PRIVATE cpr::cpr fmt DiSQLLib)
+add_library(DiSQLLib STATIC ${SOURCES})
+set_property(TARGET DiSQLLib PROPERTY CXX_STANDARD 20)
+target_link_libraries(DiSQLLib PRIVATE cpr::cpr fmt)

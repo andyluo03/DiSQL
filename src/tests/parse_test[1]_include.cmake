@@ -1,5 +1,0 @@
-if(EXISTS "/Users/andyluo/Dev/DiSQL/src/tests/parse_test[1]_tests.cmake")
-  include("/Users/andyluo/Dev/DiSQL/src/tests/parse_test[1]_tests.cmake")
-else()
-  add_test(parse_test_NOT_BUILT parse_test_NOT_BUILT)
-endif()

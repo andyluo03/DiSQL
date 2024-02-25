@@ -1,11 +1,8 @@
 #include "discord_credentials.hpp"
 
-discord_credentials::discord_credentials(const std::string& token){
-    this->token_ = token;
-    this->last_used_ = std::time(nullptr);
-}
+namespace DiSQL {
 
-bool discord_credentials::available(){
+bool DiscordCredentials::available(){
     if(this->usage_ < 50){
         return true;
     }
@@ -22,7 +19,9 @@ bool discord_credentials::available(){
     return false;
 }
 
-std::string& discord_credentials::get_token(){
+std::string DiscordCredentials::get_token(){
     usage_++;
     return this->token_;
+}
+
 }
